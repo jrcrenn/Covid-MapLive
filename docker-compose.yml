@@ -1,5 +1,14 @@
 version: "3"
-services: 
+services:
+    front:
+        container_name: front
+        build: 
+            context: "./covid_front"
+            dockerfile: Dockerfile
+        ports:
+          - '3000:3000'
+        links:
+          - server 
     server:
         container_name: server
         build: 
