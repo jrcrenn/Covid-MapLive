@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 6e5b9c80741e9f8067305df3e1cb0d9daed14d18 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586208468 +0200	clone: from https://github.com/jrcrenn/Project-1.git
+6e5b9c80741e9f8067305df3e1cb0d9daed14d18 526438f3d5d920a732343e13ac467a06b7bcdb06 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586251061 +0200	pull: Fast-forward
+526438f3d5d920a732343e13ac467a06b7bcdb06 6f3d29c718ba62803551dc28a347e3416f9f8e73 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586263638 +0200	pull: Fast-forward
+6f3d29c718ba62803551dc28a347e3416f9f8e73 6f3d29c718ba62803551dc28a347e3416f9f8e73 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586267326 +0200	checkout: moving from master to front-example
+6f3d29c718ba62803551dc28a347e3416f9f8e73 916b9d28a72c9eaf6f9b3a8c0b2b868b18c8d6e9 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586267560 +0200	commit: template
+916b9d28a72c9eaf6f9b3a8c0b2b868b18c8d6e9 6f3d29c718ba62803551dc28a347e3416f9f8e73 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586796484 +0200	checkout: moving from front-example to master
+6f3d29c718ba62803551dc28a347e3416f9f8e73 708d75d67fc58dc44bb821d924c49d3decddf8af Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586796491 +0200	pull: Fast-forward
+708d75d67fc58dc44bb821d924c49d3decddf8af a3824453983c11c1d211da323629cf20a39931a4 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586797896 +0200	commit: add Dockerfile front
+a3824453983c11c1d211da323629cf20a39931a4 6c1667e947fa9225411c59ede59c66c0aa3b6cd4 Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586800287 +0200	commit: add .dockeringore & change front port
+6c1667e947fa9225411c59ede59c66c0aa3b6cd4 8e4e616fe4dc8e9bb7bf22865c740a0bc4ac983d Jean-Robert CRENN <jean-robert.crenn@epitech.eu> 1586800509 +0200	commit: clean Dockerfile
