@@ -15,6 +15,7 @@ import { UserDto } from '../models/user/users.dto';
 import { User } from '../models/user/users.entity';
 import { UsersService } from './users.service';
 import { AuthGuard } from '@nestjs/passport';
+import { SettingsDto } from '../models/user/settings.dto';
 
 
 @Controller('users')
@@ -70,5 +71,15 @@ export class UsersController {
       }
     }
     throw new HttpException('Not updated', HttpStatus.NOT_ACCEPTABLE);
+  }
+
+  @Post('saveSettingsUser/:id')
+  async saveSettingsForUser(@Body() settingsDto: SettingsDto, @Param('id') id: number): Promise<User> {
+    try {
+      const settingsSaved = await this.usersService.saveSettingsUser(settingsDto, id);
+      return settingsSaved;
+    } catch (err) {
+      throw new HttpException(err && err.message, HttpStatus.BAD_REQUEST);
+    }
   }
 }
