@@ -3,11 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../models/user/users.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from '../models/user/users.dto';
+import { SettingsDto } from '../models/user/settings.dto';
+import { Settings } from '../models/user/settings.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) public readonly userRepository: Repository<User>,
+    @InjectRepository(Settings) public readonly settingsRepository: Repository<Settings>
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -63,5 +66,16 @@ export class UsersService {
       .where('user.email = :email', { email })
       .select(['user.salt'])
       .getOne();
+  }
+
+  async saveSettingsUser(settingsDto: SettingsDto, id: number): Promise<User> {
+    const settings: Settings = {
+      ...settingsDto,
+      user: await this.findOneById(id)
+    };
+    const createdSettings = await this.settingsRepository.save(
+      settings,
+    );
+    return createdSettings;
   }
 }
