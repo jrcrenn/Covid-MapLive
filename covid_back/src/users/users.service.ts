@@ -78,4 +78,29 @@ export class UsersService {
     );
     return createdSettings;
   }
+  
+  async getSettingsUserById(id: number): Promise<Settings[]> {
+    const settings = await this.settingsRepository.find({relations: ['user'], where: [{ user: id }]});
+    if (!settings) {
+      throw new Error('no settings for this user');
+    }
+    return settings;
+  }
+
+  async updateSettingsByUserId(userId: number, settings: SettingsDto, settingsId: number): Promise<Settings> {
+    const user = await this.getSettingsUserById(userId);
+    if (!user) {
+      throw new Error('no user with this id');
+    }
+    const settingsToUpdate = await this.settingsRepository.findOne(settingsId);
+    if (!settingsToUpdate) {
+      throw new Error('no settings with this id');
+    }
+    const settingsPayload: Settings = {
+      type: settings.type || settingsToUpdate.type,
+      options: settings.options || settingsToUpdate.options
+    };
+    const update = await this.settingsRepository.update(settingsId, settingsPayload);
+    return await this.settingsRepository.findOne(settingsId);
+  }
 }
