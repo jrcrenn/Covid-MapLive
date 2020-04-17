@@ -17,7 +17,6 @@ import { UsersService } from './users.service';
 import { AuthGuard } from '@nestjs/passport';
 import { SettingsDto } from '../models/user/settings.dto';
 import { Settings } from '../models/user/settings.entity';
-import { settings } from 'cluster';
 
 
 @Controller('users')
