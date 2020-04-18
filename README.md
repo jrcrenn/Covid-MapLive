@@ -18,3 +18,12 @@ module Utilisateur :
     - (Post) http://localhost:8080/users/saveSettingsUser/:id - params : 'userID' (number) - body : type (string) / options (string) --> Sauvegarder les préférences d'un utilisateur en base par son userID
     - (Get) http://localhost:8080/users/settingsForUser/:id - params : 'userID' (number) --> Get toutes les préférences d'un utilisateur en base par son userID
     - (Put) http://localhost:8080/users/updateSettingsUser/:userId/:settingsId - params : 'userID' (number) 'settingsID' (number) - body : type (string) / options (string) --> Update un settings d'un utilisateur en base par son userID et l'ID du settings a modifier
+
+module covidAPI : 
+
+    - (Get) http://localhost:8080/covid/worldwide --> Get Data pour le monde entier
+    - (Get) http://localhost:8080/covid/:country/select - params : 'country' (string) --> Get Data pour un pays en particulier
+    - (Get) http://localhost:8080/covid/getdataforallcountry --> Get Data pour tous les pays (json)
+    - (Get) http://localhost:8080/covid/getFatalityRateByAge --> Get le taux de mortalité par age
+    - (Get) http://localhost:8080/covid/getFatalityRateBySex --> Get le taux de mortalité par sexe
+    - (Get) http://localhost:8080/covid/getFatalityRateByComorbidities --> Get le taux de mortalité par autres maladies fatales
