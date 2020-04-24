@@ -8,6 +8,7 @@ body {
   text-align: center;
   font-family: system-ui;
   vertical-align: center;
+  background-color: whitesmoke;
 }
 
 .menuList {
@@ -16,20 +17,5 @@ body {
 }
 
 .panel {
-  background-color: papayawhip;
-}
-
-.gridRoot {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  overflow: hidden;
-}
-
-.panelResizer {
-}
-
-.gridList {
-  width: 500;
-  height: 450;
+  background-color: lightslategrey;
 }

@@ -24,7 +24,7 @@ const MenuList = ({changeMapData, addToPanel, setExternHover}) => {
 		});
 	}
 
-	const listTitle = ["Statistics", "Countries"];
+	const listTitle = ["Map Data", "Panel Widgets"];
 	const [menuIndex, setMenuIndex] = useState(listTitle.length);
 
 	useEffect(() => {
@@ -34,7 +34,7 @@ const MenuList = ({changeMapData, addToPanel, setExternHover}) => {
 
 	return (
 		<div>
-			<Box mt={"50px"}>
+			<Box mt={"35px"}>
             <Button variant="contained" onClick={() => { changeMenuList(); }} mt={"50%"}>
             	{`Show ${listTitle[menuIndex + 1 === listTitle.length ? 0 : menuIndex + 1]}`}
             </Button>

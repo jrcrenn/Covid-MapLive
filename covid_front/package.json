@@ -5,16 +5,21 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@material-ui/core": "4.6.0",
-    "@material-ui/icons": "^4.9.1",
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "country-json": "^1.1.0",
+    "countryjs": "^1.8.0",
     "d3-fetch": "1.1.2",
     "d3-scale": "3.1.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "react-grid-layout": "^0.18.3",
     "react-offcanvas": "^0.4.0",
     "react-scripts": "3.0.1",
     "react-simple-maps": "2.0.0",
     "react-sliding-side-panel": "^1.0.14",
+    "react-stack-grid": "^0.7.1",
+    "react-swipeable-views": "^0.13.9",
     "react-tooltip": "4.2.1"
   },
   "devDependencies": {

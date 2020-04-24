@@ -1,5 +1,4 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Settings } from './settings.entity';
 
 @Entity()
 export class User {
@@ -10,7 +9,7 @@ export class User {
 
   @Column({ nullable: true }) lastName?: string;
 
-  @Column({ nullable: true }) email?: string;
+  @Column() email?: string;
 
   @Column({ select: false, nullable: true })
   password?: string;
@@ -20,7 +19,4 @@ export class User {
 
   @Column({ default: false, nullable: true })
   isAdmin?: boolean;
-
-  @OneToMany(() => Settings, settings => settings.user, { nullable: true })
-  settings?: Settings[];
 }

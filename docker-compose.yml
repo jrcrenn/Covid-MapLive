@@ -7,8 +7,9 @@ services:
             dockerfile: Dockerfile
         ports:
           - '3000:3000'
+        stdin_open: true
         links:
-          - server 
+          - server
     server:
         container_name: server
         build: 

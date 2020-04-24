@@ -1,13 +1,35 @@
 import React, { useState } from "react";
 import SlidingPanel from 'react-sliding-side-panel';
+import StackGrid from "react-stack-grid";
 
 import { Button, Box } from "@material-ui/core"
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from "@material-ui/icons/Remove"
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import ArrowForward from '@material-ui/icons/ArrowForward';
+import DeleteIcon from "@material-ui/icons/Delete"
+import CloseIcon from "@material-ui/icons/Close"
+import { makeStyles } from '@material-ui/core/styles';
 
-const SidePanel = ({panelIsOpen, setPanelIsOpen, panelData}) => {
+import TileCountryInfo from "./TileCountryInfo"
+
+const SidePanel = ({panelIsOpen, setPanelIsOpen, panelData, removeFromPanel}) => {
+
+	const useStyles = makeStyles({
+		tile: {
+			border: 0,
+			borderRadius: 5,
+			boxShadow: "1px 3px 5px 0",
+			background: "grey",
+			height: 350,
+			padding: 5,
+
+			display: "flex",
+		},
+		resizer: {
+			display: "flex",
+			justifyContent: "space-between",
+			alignItems: "center",
+		},
+	});
 
 	function changePanelWidth(makeLarger) {
 		if (makeLarger && panelWidth < 75)
@@ -20,31 +42,40 @@ const SidePanel = ({panelIsOpen, setPanelIsOpen, panelData}) => {
 		}
 	}
 
-  	const [panelWidth, setPanelWidth] = useState(25);
+	const [panelWidth, setPanelWidth] = useState(25);
+	const classes = useStyles();
 
 	return (
-		<div>
-			<SlidingPanel type={"right"} isOpen={panelIsOpen} size={panelWidth} noBackdrop={true} panelClassName={"panel"}>
-				<Box my={"15px"} className={"panelResizer"}>
-					<Button aria-label="Extend" onClick={() => {changePanelWidth(true);}}>
-						<AddIcon />
+		<SlidingPanel type={"right"} isOpen={panelIsOpen} size={panelWidth} noBackdrop={true} panelClassName={"panel"}>
+			<Box>
+				<Box m={"15px"} className={classes.resizer}>
+					<Button onClick={() => {changePanelWidth(true);}}>
+						<ArrowBack />
 					</Button>
-					<Button aria-label="Reduce" onClick={() => {changePanelWidth(false);}}>
-						<RemoveIcon />
+					<Box style={{fontSize: 25, flexGrow: 100}}>Dashboard</Box>
+					<Button onClick={() => {changePanelWidth(false);}}>
+						<ArrowForward />
+					</Button>
+					<Button onClick={() => {setPanelIsOpen(false)}}>
+						<CloseIcon />
 					</Button>
 				</Box>
 
-        		<Box m={"15px"} className={"gridRoot"}>
-					<GridList cellHeight={160} className={"gridList"} cols={panelWidth / 25}>
-						{panelData.map((tile) => (
-						<GridListTile key={tile.img} cols={tile.cols || 1} rows={tile.rows || 1}>
-							<img src={tile.img} alt={tile.title} />
-						</GridListTile>
-						))}
-					</GridList>
-        		</Box>
-      		</SlidingPanel>
-		</div>
+				<StackGrid columnWidth={window.innerWidth / 4.5}>
+					{panelData.map((tile) => (
+						<Box m={"5px"} className={classes.tile} key={tile.id}>
+							{tile.type === "countryInfo" ?
+								<TileCountryInfo removeFromPanel={removeFromPanel} tile={tile} />
+							:
+								<Button onClick={() => {removeFromPanel(tile.id)}}>
+									<DeleteIcon />
+								</Button>
+							}
+						</Box>
+					))}
+      			</StackGrid>
+			</Box>
+      	</SlidingPanel>
 	)
 };
 
