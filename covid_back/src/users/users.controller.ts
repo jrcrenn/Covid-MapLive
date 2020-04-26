@@ -15,6 +15,8 @@ import { UserDto } from '../models/user/users.dto';
 import { User } from '../models/user/users.entity';
 import { UsersService } from './users.service';
 import { AuthGuard } from '@nestjs/passport';
+import { SettingsDto } from '../models/user/settings.dto';
+import { Settings } from '../models/user/settings.entity';
 
 
 @Controller('users')
@@ -70,5 +72,34 @@ export class UsersController {
       }
     }
     throw new HttpException('Not updated', HttpStatus.NOT_ACCEPTABLE);
+  }
+  @Post('saveSettingsUser/:id')
+  async saveSettingsForUser(@Body() settingsDto: SettingsDto, @Param('id') id: number): Promise<User> {
+    try {
+      const settingsSaved = await this.usersService.saveSettingsUser(settingsDto, id);
+      return settingsSaved;
+    } catch (err) {
+      throw new HttpException(err && err.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @Get('settingsForUser/:id')
+  async getSettingsForUser(@Param('id') id: number): Promise<Settings[]> {
+    try {
+      const settings = await this.usersService.getSettingsUserById(id);
+      return settings;
+    } catch (err) {
+      throw new HttpException(err && err.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @Put('updateSettingsUser/:userId/:settingsId')
+  async updateSettingsUser(@Param('userId') userId: number, @Param('settingsId') settingsId: number, @Body() settingsDto: SettingsDto): Promise<Settings> {
+    try {
+      const settingsUpdated = await this.usersService.updateSettingsByUserId(userId, settingsDto, settingsId);
+      return settingsUpdated;
+    } catch (err) {
+      throw new HttpException(err && err.message, HttpStatus.BAD_REQUEST);
+    }
   }
 }

@@ -8,9 +8,11 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { APP_CONFIG } from '../config/app.config';
+import { Settings } from '../models/user/settings.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([User, Settings]),
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({

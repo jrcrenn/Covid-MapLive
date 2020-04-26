@@ -35,4 +35,34 @@ export class CovidController {
             throw new HttpException('api down', HttpStatus.BAD_REQUEST);
         }
     }
+
+    @Get('getFatalityRateByAge')
+    async getFatalityRateByAge() {
+        try {
+            const ret = await this.Covidservice.FatalityRateByAge();
+            return ret;
+        } catch (err) {
+            throw new HttpException(err && err.message, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Get('getFatalityRateBySex')
+    async getFatalityRateBySex() {
+        try {
+            const ret = await this.Covidservice.FatalityRateBySex();
+            return ret;
+        } catch (err) {
+            throw new HttpException(err && err.message, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Get('getFatalityRateByComorbidities')
+    async getFatalityRateByComorbidities() {
+        try {
+            const ret = await this.Covidservice.FatalityRateByComorbidities();
+            return ret;
+        } catch (err) {
+            throw new HttpException(err && err.message, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

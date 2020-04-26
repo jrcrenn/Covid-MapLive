@@ -3,11 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../models/user/users.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from '../models/user/users.dto';
+import { SettingsDto } from '../models/user/settings.dto';
+import { Settings } from '../models/user/settings.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) public readonly userRepository: Repository<User>,
+    @InjectRepository(Settings) public readonly settingsRepository: Repository<Settings>
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -63,5 +66,40 @@ export class UsersService {
       .where('user.email = :email', { email })
       .select(['user.salt'])
       .getOne();
+  }
+  async saveSettingsUser(settingsDto: SettingsDto, id: number): Promise<User> {
+    const settings: Settings = {
+      ...settingsDto,
+      user: await this.findOneById(id)
+    };
+    const createdSettings = await this.settingsRepository.save(
+      settings,
+    );
+    return createdSettings;
+  }
+
+  async getSettingsUserById(id: number): Promise<Settings[]> {
+    const settings = await this.settingsRepository.find({relations: ['user'], where: [{ user: id }]});
+    if (!settings) {
+      throw new Error('no settings for this user');
+    }
+    return settings;
+  }
+
+  async updateSettingsByUserId(userId: number, settings: SettingsDto, settingsId: number): Promise<Settings> {
+    const user = await this.getSettingsUserById(userId);
+    if (!user) {
+      throw new Error('no user with this id');
+    }
+    const settingsToUpdate = await this.settingsRepository.findOne(settingsId);
+    if (!settingsToUpdate) {
+      throw new Error('no settings with this id');
+    }
+    const settingsPayload: Settings = {
+      type: settings.type || settingsToUpdate.type,
+      options: settings.options || settingsToUpdate.options
+    };
+    const update = await this.settingsRepository.update(settingsId, settingsPayload);
+    return await this.settingsRepository.findOne(settingsId);
   }
 }
